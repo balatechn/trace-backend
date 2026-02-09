@@ -297,10 +297,15 @@ async def request_screenshot(
     return command
 
 
+class MessageRequest(BaseModel):
+    message: str
+    title: Optional[str] = "IT Admin Message"
+
+
 @router.post("/message/{device_id}", response_model=CommandResponse)
 async def send_message(
     device_id: UUID,
-    message: str,
+    message_data: MessageRequest,
     request: Request,
     current_user: User = Depends(require_admin),
     db: AsyncSession = Depends(get_db)
@@ -317,7 +322,7 @@ async def send_message(
     command = RemoteCommand(
         device_id=device_id,
         command_type=CommandType.MESSAGE,
-        message=message,
+        message=message_data.message,
         created_by=current_user.id
     )
     db.add(command)
