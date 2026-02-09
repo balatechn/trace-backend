@@ -1,5 +1,7 @@
 # Build tools
+pip>=24.0
 setuptools>=69.0.0
+wheel>=0.42.0
 
 # FastAPI and Web
 fastapi==0.109.0
