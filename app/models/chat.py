@@ -34,6 +34,6 @@ class ChatMessage(Base):
     
     created_at = Column(DateTime, default=datetime.utcnow)
     
-    # Relationships
-    device = relationship("Device", backref="chat_messages")
-    sender = relationship("User", backref="sent_messages")
+    # Relationships (no backref to avoid loading issues)
+    device = relationship("Device")
+    sender = relationship("User")

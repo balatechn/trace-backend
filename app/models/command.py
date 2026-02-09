@@ -56,6 +56,6 @@ class RemoteCommand(Base):
     sent_at = Column(DateTime, nullable=True)
     executed_at = Column(DateTime, nullable=True)
     
-    # Relationships
-    device = relationship("Device", backref="commands")
-    creator = relationship("User", backref="commands_created")
+    # Relationships (no backref to avoid loading issues)
+    device = relationship("Device")
+    creator = relationship("User")
