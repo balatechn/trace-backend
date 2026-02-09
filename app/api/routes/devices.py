@@ -61,13 +61,13 @@ async def list_devices(
     
     # Get total count
     total_result = await db.execute(count_query)
-    total = total_result.scalar()
+    total = total_result.scalar() or 0
     
     # Get online/offline counts
     online_result = await db.execute(
         select(func.count(Device.id)).where(Device.status == DeviceStatus.ONLINE)
     )
-    online_count = online_result.scalar()
+    online_count = online_result.scalar() or 0
     
     # Apply pagination
     query = query.offset((page - 1) * per_page).limit(per_page)
