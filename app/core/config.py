@@ -57,7 +57,7 @@ class Settings(BaseSettings):
         return self
     
     # CORS
-    CORS_ORIGINS: List[str] = ["http://localhost:3000", "https://trace.yourdomain.com"]
+    CORS_ORIGINS: List[str] = ["http://localhost:3000", "https://trace-eosin.vercel.app", "https://trace.yourdomain.com"]
     
     # Encryption
     ENCRYPTION_KEY: str = secrets.token_urlsafe(32)
