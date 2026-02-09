@@ -10,6 +10,12 @@ from app.core.config import settings
 database_url = settings.DATABASE_URL
 connect_args = {}
 
+# Convert postgresql:// to postgresql+asyncpg:// for async support
+if database_url.startswith("postgresql://"):
+    database_url = database_url.replace("postgresql://", "postgresql+asyncpg://", 1)
+elif database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql+asyncpg://", 1)
+
 # Handle SSL for cloud databases (Neon, Vercel, etc.)
 if "neon.tech" in database_url or "vercel" in database_url.lower():
     # Remove sslmode from URL if present (asyncpg doesn't support it)
