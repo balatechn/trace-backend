@@ -21,7 +21,7 @@ class ChatMessage(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     device_id = Column(UUID(as_uuid=True), ForeignKey("devices.id"), nullable=False, index=True)
     
-    direction = Column(SQLEnum(MessageDirection), nullable=False)
+    direction = Column(String(50), nullable=False)  # Store as string
     message = Column(Text, nullable=False)
     
     # Sender info

@@ -34,8 +34,8 @@ class RemoteCommand(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     device_id = Column(UUID(as_uuid=True), ForeignKey("devices.id"), nullable=False, index=True)
     
-    command_type = Column(SQLEnum(CommandType), nullable=False)
-    status = Column(SQLEnum(CommandStatus), default=CommandStatus.PENDING)
+    command_type = Column(String(50), nullable=False)  # Store as string
+    status = Column(String(50), default="pending")  # Store as string
     
     # Command payload (JSON string for complex commands)
     payload = Column(Text, nullable=True)
